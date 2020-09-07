@@ -27,6 +27,6 @@ public class StraightFlush implements Combination {
                 .anyMatch(list -> list.size() >= 5);
 
 
-        return new CombinationResult(flush);
+        return new CombinationResult(flush, this);
     }
 }

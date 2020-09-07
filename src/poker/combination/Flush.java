@@ -19,7 +19,7 @@ public class Flush implements Combination {
         boolean result = bySuit.values()
                 .stream()
                 .anyMatch(list -> list.size() >= 5);
-        return new CombinationResult(result);
+        return new CombinationResult(result, this);
     }
 
     @Override

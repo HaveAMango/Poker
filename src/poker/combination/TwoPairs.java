@@ -27,7 +27,7 @@ public class TwoPairs implements Combination {
                 .stream()
                 .filter(list -> list.size() == 2)
                 .count() >= 2;
-        return new CombinationResult(result);
+        return new CombinationResult(result, this);
 
     }
 }

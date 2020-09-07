@@ -27,7 +27,7 @@ public class ThreoOfaKind implements Combination {
         boolean result = byValue.values()
                 .stream()
                 .anyMatch(list -> list.size() >= 3);
-        return new CombinationResult(result);
+        return new CombinationResult(result, this);
     }
 
     @Override

@@ -31,7 +31,7 @@ public class FullHouse implements Combination {
                 .stream()
                 .filter(list -> list.size() == 3)
                 .count() >= 1;
-        return new CombinationResult(hasPair && hasSet);
+        return new CombinationResult(hasPair && hasSet, this);
 
 
     }

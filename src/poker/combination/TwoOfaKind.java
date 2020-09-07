@@ -19,7 +19,7 @@ public class TwoOfaKind implements Combination {
         boolean result = byValue.values()
                 .stream()
                 .anyMatch(list -> list.size() >= 2);
-        return new CombinationResult(result);
+        return new CombinationResult(result, this);
     }
 
     @Override

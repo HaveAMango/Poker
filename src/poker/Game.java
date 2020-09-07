@@ -34,8 +34,8 @@ public class Game {
 
         for (Combination combination : combinations) {
             for (Player player : players) {
-                CombinationResult result = combination.answer(player);
-                System.out.println(result);
+                player.setResult(combination.answer(player));
+                System.out.println(player.getResult());
             }
         }
 

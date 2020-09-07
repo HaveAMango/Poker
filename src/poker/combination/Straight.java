@@ -25,5 +25,5 @@ public class Straight implements Combination {
 //                .stream()
 //                .anyMatch(list -> list.size() >= 3);
 //    }
-        return new CombinationResult(true);
+        return new CombinationResult(true, this);
 }}

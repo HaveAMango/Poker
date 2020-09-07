@@ -1,5 +1,7 @@
 package poker;
 
+import poker.combination.CombinationResult;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +9,7 @@ public class Player {
 
     private Hand hand;
     private Board board;
+    private CombinationResult result;
 
     public List<Card> getAllCards() {
         List<Card> cards = new ArrayList<>();
@@ -17,6 +20,18 @@ public class Player {
 
     public Hand getHand() {
         return hand;
+    }
+
+    public CombinationResult getResult() {
+        return result;
+    }
+
+    public void setResult(CombinationResult result) {
+        if (!result.isExists()) return;
+
+        if (this.result != null) return;
+
+        this.result = result;
     }
 
     public Player(Board board, Hand hand) {
