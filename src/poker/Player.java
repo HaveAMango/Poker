@@ -5,7 +5,7 @@ import poker.combination.CombinationResult;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player {
+public class Player implements Comparable<Player> {
 
     private Hand hand;
     private Board board;
@@ -38,7 +38,12 @@ public class Player {
     }
 
     @Override
+    public int compareTo(Player o) {
+        return result.compareTo(o.result);
+    }
+
+    @Override
     public String toString() {
-        return getAllCards().toString();
+        return getHand().toString();
     }
 }

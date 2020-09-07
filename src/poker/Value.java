@@ -1,21 +1,43 @@
 package poker;
 
-public class Value {
+import java.util.Arrays;
 
-public static final int TWO = 1;
-    public static final int THREE = 1;
-    public static final int FOUR = 1;
-    public static final int FIVE = 1;
-    public static final int SIX = 1;
-    public static final int EVEN = 1;
-    public static final int EIGHT = 1;
-    public static final int NINE = 1;
-    public static final int JAKE = 1;
-    public static final int QWEEN = 1;
-    public static final int KING = 1;
-    public static final int ACE = 1;
+public enum Value {
+    ONE("1", 1),
+    TWO("2", 2),
+    THREE("3", 3),
+    FOUR("4", 4),
+    FIVE("5",5),
+    SIX("6", 6),
+    SEVEN("7", 7),
+    EIGHT("8", 8),
+    NINE("9", 9),
+    TEN("T", 10),
+    JACK("J", 11),
+    QUEEN("Q", 12),
+    KING("K", 13),
+    ACE("A", 14);
 
-    public Value() {
+    private String symbol;
+    private int value;
 
+    Value(String symbol, int value) {
+        this.symbol = symbol;
+        this.value = value;
+    }
+
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public static Value parse(String symbol) throws Exception {
+        return Arrays.stream(Value.values())
+                .filter(v -> v.symbol.equals(symbol))
+                .findAny()
+                .orElseThrow();
     }
 }

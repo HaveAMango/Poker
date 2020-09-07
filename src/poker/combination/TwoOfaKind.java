@@ -2,6 +2,7 @@ package poker.combination;
 
 import poker.Card;
 import poker.Player;
+import poker.Value;
 
 import java.util.List;
 import java.util.Map;
@@ -13,7 +14,7 @@ public class TwoOfaKind implements Combination {
     public CombinationResult answer(Player player) {
         List<Card> cards = player.getAllCards();
 
-        Map<Integer, List<Card>> byValue = cards
+        Map<Value, List<Card>> byValue = cards
                 .stream()
                 .collect(Collectors.groupingBy(card -> card.value));
         boolean result = byValue.values()

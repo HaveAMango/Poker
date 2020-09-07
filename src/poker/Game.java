@@ -19,8 +19,9 @@ public class Game {
         System.out.println("Enter cards");
 
 //        String cards = scanner.nextLine();  // Read user input
-        String cards = "4c5s3h8s7s 3d4s 4h4d 7s9s 8h9d 1d6d";
+        String cards = "Kc5s3h8s7s Kd4s 4h4d 7s9s 8h9d 1d6d";
         //System.out.println(cards);  // Output user input
+
         Game game = new Game();
         game.initialize(cards);
         game.process();
@@ -43,10 +44,11 @@ public class Game {
 
         //TODO: Other combinations
 
-        //TODO: Sort and output players based on combinations
-        List<CombinationResult> sortedResults = players.stream().map(p -> p.getResult()).sorted().collect(Collectors.toList());
-        Collections.reverse(sortedResults);
-        System.out.println(sortedResults);
+        List<Player> sortedPlayers = players.stream()
+                .sorted()
+                .collect(Collectors.toList());
+        Collections.reverse(sortedPlayers);
+        System.out.println(sortedPlayers);
     }
 
     private void initialize(String input) throws Exception {

@@ -25,6 +25,9 @@ public class CombinationResult implements Comparable<CombinationResult> {
 
     @Override
     public String toString() {
+        if (!exists) {
+            return "NoCombination";
+        }
         return combination.getClass().getSimpleName() + " (" + getPriority() + ")";
     }
 }
