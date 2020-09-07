@@ -27,9 +27,7 @@ public class Player {
     }
 
     public void setResult(CombinationResult result) {
-        if (!result.isExists()) return;
-
-        if (this.result != null) return;
+        if (this.result != null && this.result.isExists()) return;
 
         this.result = result;
     }

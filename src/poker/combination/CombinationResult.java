@@ -1,6 +1,6 @@
 package poker.combination;
 
-public class CombinationResult {
+public class CombinationResult implements Comparable<CombinationResult> {
 
     private boolean exists;
     private Combination combination;
@@ -16,6 +16,11 @@ public class CombinationResult {
 
     public int getPriority() {
         return combination.priority();
+    }
+
+    @Override
+    public int compareTo(CombinationResult o) {
+        return getPriority() - o.getPriority();
     }
 
     @Override

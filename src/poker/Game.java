@@ -6,8 +6,10 @@ import poker.combination.ThreoOfaKind;
 import poker.combination.TwoOfaKind;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Game {
     List<Player> players = new ArrayList<>();
@@ -42,6 +44,9 @@ public class Game {
         //TODO: Other combinations
 
         //TODO: Sort and output players based on combinations
+        List<CombinationResult> sortedResults = players.stream().map(p -> p.getResult()).sorted().collect(Collectors.toList());
+        Collections.reverse(sortedResults);
+        System.out.println(sortedResults);
     }
 
     private void initialize(String input) throws Exception {
