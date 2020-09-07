@@ -11,7 +11,7 @@ public class Flush implements Combination {
 
     @Override
     public CombinationResult answer(Player player) {
-        List<Card> cards = player.getHandaboard();
+        List<Card> cards = player.getAllCards();
 
         Map<String, List<Card>> bySuit = cards
                 .stream()
@@ -24,6 +24,6 @@ public class Flush implements Combination {
 
     @Override
     public int priority() {
-        return 0;
+        return 6;
     }
 }

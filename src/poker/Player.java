@@ -5,19 +5,27 @@ import java.util.List;
 
 public class Player {
 
-    private List<Card> handaboard = new ArrayList<>();
+    private Hand hand;
+    private Board board;
 
-    public List<Card> getHandaboard() {
-        return handaboard;
+    public List<Card> getAllCards() {
+        List<Card> cards = new ArrayList<>();
+        cards.addAll(hand.getCards());
+        cards.addAll(board.getCards());
+        return cards;
+    }
+
+    public Hand getHand() {
+        return hand;
     }
 
     public Player(Board board, Hand hand) {
-        handaboard.addAll(board.getBoard());
-        handaboard.addAll(hand.getHand());
+        this.board = board;
+        this.hand = hand;
     }
 
     @Override
     public String toString() {
-        return handaboard.toString();
+        return getAllCards().toString();
     }
 }

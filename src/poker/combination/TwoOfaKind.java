@@ -11,7 +11,7 @@ public class TwoOfaKind implements Combination {
 
     @Override
     public CombinationResult answer(Player player) {
-        List<Card> cards = player.getHandaboard();
+        List<Card> cards = player.getAllCards();
 
         Map<Integer, List<Card>> byValue = cards
                 .stream()
@@ -24,6 +24,6 @@ public class TwoOfaKind implements Combination {
 
     @Override
     public int priority() {
-        return 0;
+        return 2;
     }
 }

@@ -11,4 +11,9 @@ public class CombinationResult {
     public boolean isExists() {
         return exists;
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(exists);
+    }
 }

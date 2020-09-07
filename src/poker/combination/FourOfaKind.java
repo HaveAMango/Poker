@@ -11,12 +11,12 @@ public class FourOfaKind implements Combination {
 
     @Override
     public int priority() {
-        return 0;
+        return 8;
     }
 
     @Override
     public CombinationResult answer(Player player) {
-        List<Card> cards = player.getHandaboard();
+        List<Card> cards = player.getAllCards();
 
         Map<Integer, List<Card>> byValue = cards
                 .stream()

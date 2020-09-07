@@ -1,27 +1,25 @@
 package poker;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Hand {
 
-    List<Card> hand = new ArrayList<>();
+    List<Card> cards;
 
-    public List<Card> getHand() {
-        return hand;
+    public List<Card> getCards() {
+        return cards;
     }
 
-    public Hand(List<Card> hand)throws Exception {
-        if (hand.size() !=2) {
+    public Hand(List<Card> cards) throws Exception {
+        if (cards.size() != 2) {
             throw new Exception("hand`s length is not right");
-        }else{
-            this.hand = hand;
+        } else {
+            this.cards = cards;
         }
-
     }
 
     @Override
     public String toString() {
-        return hand.toString();
+        return cards.toString();
     }
 }
