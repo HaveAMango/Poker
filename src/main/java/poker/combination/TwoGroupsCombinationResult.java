@@ -14,6 +14,26 @@ public class TwoGroupsCombinationResult extends CombinationResult {
     }
 
     @Override
+    public int compareTo(CombinationResult o) {
+        int priorityDelta = super.compareTo(o);
+        if (priorityDelta != 0) {
+            return priorityDelta;
+        }
+
+        if (o instanceof TwoGroupsCombinationResult) {
+            TwoGroupsCombinationResult other = (TwoGroupsCombinationResult) o;
+            int delta1 = value1.compareTo(other.value1);
+            if (delta1 != 0) {
+                return delta1;
+            }
+
+            return value2.compareTo(other.value2);
+        }
+
+        throw new RuntimeException("Should not be here");
+    }
+
+    @Override
     public String toString() {
         if (value1 == Value.NONE || value2 == Value.NONE) {
             return "NoCombination";
