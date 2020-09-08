@@ -29,6 +29,10 @@ public class TwoPairs implements Combination {
                 .filter(list -> list.size() == 2)
                 .count() >= 2;
         return new CombinationResult(result, this);
+    }
 
+    @Override
+    public String name() {
+        return "Two Pairs";
     }
 }

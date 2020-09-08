@@ -44,6 +44,11 @@ public class Player implements Comparable<Player> {
 
     @Override
     public String toString() {
-        return getHand().toString();
+        //return getHand().toString();
+        return info();
+    }
+
+    private String info() {
+        return "Player(" + hand + " | " + hand + board + ") - " + result;
     }
 }

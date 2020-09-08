@@ -3,7 +3,7 @@ package poker.combination;
 public class CombinationResult implements Comparable<CombinationResult> {
 
     private boolean exists;
-    private Combination combination;
+    protected Combination combination;
 
     public CombinationResult(boolean exists, Combination combination) {
         this.exists = exists;
@@ -28,6 +28,6 @@ public class CombinationResult implements Comparable<CombinationResult> {
         if (!exists) {
             return "NoCombination";
         }
-        return combination.getClass().getSimpleName() + " (" + getPriority() + ")";
+        return combination.name() + " (" + getPriority() + ")";
     }
 }

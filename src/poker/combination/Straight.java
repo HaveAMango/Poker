@@ -26,4 +26,10 @@ public class Straight implements Combination {
 //                .anyMatch(list -> list.size() >= 3);
 //    }
         return new CombinationResult(true, this);
-}}
+    }
+
+    @Override
+    public String name() {
+        return "Straight";
+    }
+}

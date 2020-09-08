@@ -1,9 +1,6 @@
 package poker;
 
-import poker.combination.Combination;
-import poker.combination.CombinationResult;
-import poker.combination.ThreoOfaKind;
-import poker.combination.TwoOfaKind;
+import poker.combination.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,7 +16,7 @@ public class Game {
         System.out.println("Enter cards");
 
 //        String cards = scanner.nextLine();  // Read user input
-        String cards = "Kc5s3h8s7s Kd4s 4h4d 7s9s 8h9d 1d6d";
+        String cards = "Kc5s3h8s7s Kd4s 4h4d Ts9s 8h9d 1d6d";
         //System.out.println(cards);  // Output user input
 
         Game game = new Game();
@@ -32,13 +29,15 @@ public class Game {
     private void process() {
         //check each player for two of a kind
         List<Combination> combinations = new ArrayList<>();
-        combinations.add(new ThreoOfaKind());
+        combinations.add(new FourOfaKind());
+        combinations.add(new Flush());
+        combinations.add(new ThreeOfaKind());
         combinations.add(new TwoOfaKind());
+        combinations.add(new HighCard());
 
         for (Combination combination : combinations) {
             for (Player player : players) {
                 player.setResult(combination.answer(player));
-                System.out.println(player.getResult());
             }
         }
 
@@ -48,7 +47,7 @@ public class Game {
                 .sorted()
                 .collect(Collectors.toList());
         Collections.reverse(sortedPlayers);
-        System.out.println(sortedPlayers);
+        sortedPlayers.forEach(System.out::println);
     }
 
     private void initialize(String input) throws Exception {
@@ -61,12 +60,11 @@ public class Game {
 
             if (cards.size() > 2) {
                 board = new Board(cards);
-                System.out.println(board.toString());
             } else {
                 Hand hand = new Hand(cards);
                 Player player = new Player(board, hand);
                 this.players.add(player);
-                System.out.println(players);
+
             }
         }
     }

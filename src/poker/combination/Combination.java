@@ -7,4 +7,6 @@ public interface Combination {
    CombinationResult answer(Player player);
 
    int priority();
+
+   String name();
 }

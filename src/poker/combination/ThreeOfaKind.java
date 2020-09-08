@@ -1,20 +1,20 @@
 package poker.combination;
 
-public class FourOfaKind extends NCards {
+public class ThreeOfaKind extends NCards {
 
     @Override
     public String name() {
-        return "Quads";
+        return "Set";
     }
 
     @Override
     public int priority() {
-        return 8;
+        return 4;
     }
 
     @Override
     protected int cardCount() {
-        return 4;
+        return 3;
     }
 }
 

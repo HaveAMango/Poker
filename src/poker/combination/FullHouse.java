@@ -33,7 +33,10 @@ public class FullHouse implements Combination {
                 .filter(list -> list.size() == 3)
                 .count() >= 1;
         return new CombinationResult(hasPair && hasSet, this);
+    }
 
-
+    @Override
+    public String name() {
+        return "Full House";
     }
 }

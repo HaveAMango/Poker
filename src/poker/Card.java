@@ -1,6 +1,6 @@
 package poker;
 
-public class Card {
+public class Card implements Comparable<Card> {
 
     //refactor to getters
     public Value value;
@@ -20,9 +20,22 @@ public class Card {
         }
     }
 
+    public String getSuit() {
+        return suit;
+    }
+
+    public Value getValue() {
+        return value;
+    }
+
     @Override
     public String toString() {
         return value.getSymbol() + suit;
+    }
+
+    @Override
+    public int compareTo(Card o) {
+        return value.compareTo(o.value);
     }
 }
 

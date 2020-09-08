@@ -1,6 +1,7 @@
 package poker;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Board {
     List<Card> cards;
@@ -19,7 +20,7 @@ public class Board {
 
     @Override
     public String toString() {
-        return cards.toString();
+        return cards.stream().map(c -> c.toString()).collect(Collectors.joining(""));
     }
 }
 

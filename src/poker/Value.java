@@ -3,6 +3,8 @@ package poker;
 import java.util.Arrays;
 
 public enum Value {
+    NONE("-", 0),
+
     ONE("1", 1),
     TWO("2", 2),
     THREE("3", 3),

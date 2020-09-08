@@ -30,4 +30,9 @@ public class StraightFlush implements Combination {
 
         return new CombinationResult(flush, this);
     }
+
+    @Override
+    public String name() {
+        return "Straight Flush";
+    }
 }
