@@ -26,15 +26,13 @@ public class Game {
 
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);  // Create a Scanner object
-        System.out.println("Enter cards");
 
-//        String cards = scanner.nextLine();  // Read user input
-        String cards = "4cKs4h8s7s Ad4s Ac4d As9s KhKd 5d6d";
-        //System.out.println(cards);  // Output user input
-
-        Game game = new Game();
-        game.initialize(cards);
-        game.process();
+        while (scanner.hasNextLine()) {
+            String cards = scanner.nextLine();  // Read user input
+            Game game = new Game();
+            game.initialize(cards);
+            game.process();
+        }
     }
 
     private void process() {
@@ -69,6 +67,7 @@ public class Game {
 
             previous = current;
         }
+        System.out.println();
     }
 
     private void initialize(String input) throws Exception {
