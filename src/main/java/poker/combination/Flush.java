@@ -24,7 +24,7 @@ public class Flush implements Combination {
                 .filter(cards -> cards.size() >= 5)
                 .findAny();
 
-        if (flushCards.isEmpty()) {
+        if (!flushCards.isPresent()) {
             return new NCardsCombinationResult(this, Value.NONE);
         }
 

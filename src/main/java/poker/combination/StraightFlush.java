@@ -31,7 +31,7 @@ public class StraightFlush implements Combination {
                 .filter(cards -> cards.size() >= 5)
                 .findAny();
 
-        if (flushCards.isEmpty()) {
+        if (!flushCards.isPresent()) {
             return null;
         }
 

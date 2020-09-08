@@ -40,6 +40,6 @@ public enum Value {
         return Arrays.stream(Value.values())
                 .filter(v -> v.symbol.equals(symbol))
                 .findAny()
-                .orElseThrow();
+                .orElseThrow(() -> new Exception("Invalid value: " + symbol));
     }
 }
