@@ -1,7 +1,5 @@
 package poker.combination;
 
-import poker.combination.TwoGroups;
-
 public class FullHouse extends TwoGroups {
 
     @Override
