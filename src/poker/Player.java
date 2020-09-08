@@ -47,6 +47,10 @@ public class Player implements Comparable<Player> {
         return getHand().toString().compareTo(o.getHand().toString());
     }
 
+    public boolean handEquals(Player o) {
+        return result.compareTo(o.result) == 0;
+    }
+
     @Override
     public String toString() {
         if (Game.DEBUG) {

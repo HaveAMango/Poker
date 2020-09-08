@@ -57,8 +57,18 @@ public class Game {
             return;
         }
 
-        String result = players.stream().map(player -> player.toString()).collect(Collectors.joining(" "));
-        System.out.println(result);
+        Player previous = null;
+        for (int i = 0; i < players.size(); i++) {
+            Player current = players.get(i);
+            if (previous != null && current.handEquals(previous)) {
+                System.out.print("=");
+            } else if (previous != null) {
+                System.out.print(" ");
+            }
+            System.out.print(current);
+
+            previous = current;
+        }
     }
 
     private void initialize(String input) throws Exception {
