@@ -3,9 +3,6 @@ package poker.combination;
 import poker.Card;
 import poker.Player;
 import poker.Value;
-import poker.combination.Combination;
-import poker.combination.CombinationResult;
-import poker.combination.NCardsCombinationResult;
 
 import java.util.Comparator;
 import java.util.List;
@@ -19,7 +16,11 @@ public class Straight implements Combination {
     }
 
     public CombinationResult answer(Player player) {
-        List<Card> sortedCards = player.getAllCards()
+        return answer(player.getAllCards());
+    }
+
+    public CombinationResult answer(List<Card> cards) {
+        List<Card> sortedCards = cards
                 .stream()
                 .sorted(Comparator.naturalOrder())
                 .collect(Collectors.toList());
@@ -45,7 +46,6 @@ public class Straight implements Combination {
 
         return new NCardsCombinationResult(this, maxStreak >= 5 ? maxCard.value : Value.NONE);
     }
-
 
     @Override
     public String name() {

@@ -1,11 +1,8 @@
-package poker.combination.wip;
+package poker.combination;
 
 import poker.Card;
 import poker.Player;
 import poker.Value;
-import poker.combination.Combination;
-import poker.combination.CombinationResult;
-import poker.combination.TwoGroupsCombinationResult;
 
 import java.util.Collection;
 import java.util.List;
@@ -13,12 +10,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class FullHouse implements Combination {
-
-    @Override
-    public int priority() {
-        return 7;
-    }
+public abstract class TwoGroups implements Combination {
 
     @Override
     public CombinationResult answer(Player player) {
@@ -26,9 +18,10 @@ public class FullHouse implements Combination {
                 .stream()
                 .collect(Collectors.groupingBy(card -> card.value));
 
-        Optional<Value> pairValue = highestNValue(byValue.values(), 2);
-        Optional<Value> threesValue = highestNValue(byValue.values(), 3);
-        return new TwoGroupsCombinationResult(this, threesValue.orElse(Value.NONE), pairValue.orElse(Value.NONE));
+        Optional<Value> group1value = highestNValue(byValue.values(), group1size());
+        byValue.values().removeIf(cards -> cards.get(0).getValue().equals(group1value.orElse(Value.NONE)));
+        Optional<Value> group2value = highestNValue(byValue.values(), group2size());
+        return new TwoGroupsCombinationResult(this, group1value.orElse(Value.NONE), group2value.orElse(Value.NONE));
     }
 
     private Optional<Value> highestNValue(Collection<List<Card>> cardGroups, int n) {
@@ -39,8 +32,7 @@ public class FullHouse implements Combination {
                 .map(cards -> cards.get(0).getValue());
     }
 
-    @Override
-    public String name() {
-        return "Full House";
-    }
+    protected abstract int group1size();
+
+    protected abstract int group2size();
 }

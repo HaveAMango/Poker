@@ -25,6 +25,10 @@ public class NCardsCombinationResult extends CombinationResult {
         throw new RuntimeException("Should not be here");
     }
 
+    public Value getValue() {
+        return value;
+    }
+
     @Override
     public String toString() {
         if (value == Value.NONE) {

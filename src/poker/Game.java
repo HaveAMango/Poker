@@ -1,11 +1,8 @@
 package poker;
 
 import poker.combination.*;
-import poker.combination.Straight;
-import poker.combination.wip.FullHouse;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -13,12 +10,16 @@ import java.util.stream.Collectors;
 public class Game {
     List<Player> players = new ArrayList<>();
 
+    public static boolean DEBUG = false;
+
     Combination[] combinations = {
+            new StraightFlush(),
             new FourOfaKind(),
             new FullHouse(),
             new Flush(),
             new Straight(),
             new ThreeOfaKind(),
+            new TwoPairs(),
             new TwoOfaKind(),
             new HighCard()
     };
@@ -28,14 +29,12 @@ public class Game {
         System.out.println("Enter cards");
 
 //        String cards = scanner.nextLine();  // Read user input
-        String cards = "Kc5s8h8s7s Kd4s 6h4d Ts9s 8s7d 1d6d";
+        String cards = "4cKs4h8s7s Ad4s Ac4d As9s KhKd 5d6d";
         //System.out.println(cards);  // Output user input
 
         Game game = new Game();
         game.initialize(cards);
         game.process();
-
-
     }
 
     private void process() {
@@ -45,11 +44,21 @@ public class Game {
             }
         }
 
-        List<Player> sortedPlayers = players.stream()
+
+        printResult(players);
+    }
+
+    private void printResult(List<Player> players) {
+        players = players.stream()
                 .sorted()
                 .collect(Collectors.toList());
-        Collections.reverse(sortedPlayers);
-        sortedPlayers.forEach(System.out::println);
+        if (DEBUG) {
+            players.forEach(System.out::println);
+            return;
+        }
+
+        String result = players.stream().map(player -> player.toString()).collect(Collectors.joining(" "));
+        System.out.println(result);
     }
 
     private void initialize(String input) throws Exception {
@@ -66,7 +75,6 @@ public class Game {
                 Hand hand = new Hand(cards);
                 Player player = new Player(board, hand);
                 this.players.add(player);
-
             }
         }
     }

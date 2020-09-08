@@ -39,13 +39,21 @@ public class Player implements Comparable<Player> {
 
     @Override
     public int compareTo(Player o) {
-        return result.compareTo(o.result);
+        int delta = result.compareTo(o.result);
+        if (delta != 0) {
+            return delta;
+        }
+
+        return getHand().toString().compareTo(o.getHand().toString());
     }
 
     @Override
     public String toString() {
-        //return getHand().toString();
-        return info();
+        if (Game.DEBUG) {
+            return info();
+        } else {
+            return getHand().toString();
+        }
     }
 
     private String info() {
