@@ -2,8 +2,14 @@ package poker.combination;
 
 import poker.Card;
 import poker.Player;
+import poker.Value;
+import poker.combination.Combination;
+import poker.combination.CombinationResult;
+import poker.combination.NCardsCombinationResult;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Straight implements Combination {
 
@@ -12,21 +18,34 @@ public class Straight implements Combination {
         return 5;
     }
 
-    @Override
     public CombinationResult answer(Player player) {
-        List<Card> cards = player.getAllCards();
+        List<Card> sortedCards = player.getAllCards()
+                .stream()
+                .sorted(Comparator.naturalOrder())
+                .collect(Collectors.toList());
 
-//        Map<Integer, List<poker.Card>> byValue = cards
-//                .stream()
-//                .filter(card -> card.value )
-//                .sorted(card -> Comparator.naturalOrder())
-//                .collect(Collectors.groupingBy(card -> card.value));
-//        return byValue.values()
-//                .stream()
-//                .anyMatch(list -> list.size() >= 3);
-//    }
-        return new CombinationResult(true, this);
+
+        int currentStreak = 1;
+        int maxStreak = 1;
+        Card maxCard = null;
+        for (int i = 1; i < sortedCards.size(); i++) {
+            Card current = sortedCards.get(i);
+            Card previous = sortedCards.get(i - 1);
+            int delta = current.getValue().compareTo(previous.getValue());
+            if (delta == 1) {
+                currentStreak++;
+                if (currentStreak >= maxStreak) {
+                    maxStreak = currentStreak;
+                    maxCard = current;
+                }
+            } else if (delta != 0) {
+                currentStreak = 1;
+            }
+        }
+
+        return new NCardsCombinationResult(this, maxStreak >= 5 ? maxCard.value : Value.NONE);
     }
+
 
     @Override
     public String name() {

@@ -1,6 +1,8 @@
 package poker;
 
 import poker.combination.*;
+import poker.combination.Straight;
+import poker.combination.wip.FullHouse;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,12 +13,22 @@ import java.util.stream.Collectors;
 public class Game {
     List<Player> players = new ArrayList<>();
 
+    Combination[] combinations = {
+            new FourOfaKind(),
+            new FullHouse(),
+            new Flush(),
+            new Straight(),
+            new ThreeOfaKind(),
+            new TwoOfaKind(),
+            new HighCard()
+    };
+
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);  // Create a Scanner object
         System.out.println("Enter cards");
 
 //        String cards = scanner.nextLine();  // Read user input
-        String cards = "Kc5s3h8s7s Kd4s 4h4d Ts9s 8h9d 1d6d";
+        String cards = "Kc5s8h8s7s Kd4s 6h4d Ts9s 8s7d 1d6d";
         //System.out.println(cards);  // Output user input
 
         Game game = new Game();
@@ -27,21 +39,11 @@ public class Game {
     }
 
     private void process() {
-        //check each player for two of a kind
-        List<Combination> combinations = new ArrayList<>();
-        combinations.add(new FourOfaKind());
-        combinations.add(new Flush());
-        combinations.add(new ThreeOfaKind());
-        combinations.add(new TwoOfaKind());
-        combinations.add(new HighCard());
-
         for (Combination combination : combinations) {
             for (Player player : players) {
                 player.setResult(combination.answer(player));
             }
         }
-
-        //TODO: Other combinations
 
         List<Player> sortedPlayers = players.stream()
                 .sorted()

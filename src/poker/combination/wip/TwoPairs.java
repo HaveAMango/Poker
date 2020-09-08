@@ -1,18 +1,20 @@
-package poker.combination;
+package poker.combination.wip;
 
 import poker.Card;
 import poker.Player;
 import poker.Value;
+import poker.combination.Combination;
+import poker.combination.CombinationResult;
 
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class FullHouse implements Combination {
+public class TwoPairs implements Combination {
 
     @Override
     public int priority() {
-        return 7;
+        return 3;
     }
 
     @Override
@@ -24,19 +26,15 @@ public class FullHouse implements Combination {
 
                 .collect(Collectors.groupingBy(card -> card.value));
 
-        boolean hasPair = byValue.values()
+        boolean result = byValue.values()
                 .stream()
                 .filter(list -> list.size() == 2)
-                .count() >= 1;
-        boolean hasSet = byValue.values()
-                .stream()
-                .filter(list -> list.size() == 3)
-                .count() >= 1;
-        return new CombinationResult(hasPair && hasSet, this);
+                .count() >= 2;
+        return new CombinationResult(result, this);
     }
 
     @Override
     public String name() {
-        return "Full House";
+        return "Two Pairs";
     }
 }
