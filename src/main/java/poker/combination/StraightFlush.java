@@ -8,6 +8,7 @@ import poker.combination.CombinationResult;
 import poker.combination.NCardsCombinationResult;
 import poker.combination.Straight;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -35,8 +36,12 @@ public class StraightFlush implements Combination {
             return null;
         }
 
-        NCardsCombinationResult answer = (NCardsCombinationResult) new Straight().answer(flushCards.get());
-        return new NCardsCombinationResult(this, answer.isExists() ? answer.getValue() : Value.NONE, flushCards.get());
+        List<Card> sortedFlushCards = flushCards.get().stream()
+                .sorted(Comparator.reverseOrder())
+                .collect(Collectors.toList());
+
+        NCardsCombinationResult answer = (NCardsCombinationResult) new Straight().answer(sortedFlushCards);
+        return new NCardsCombinationResult(this, answer.isExists() ? answer.getValue() : Value.NONE, sortedFlushCards);
     }
 
     @Override

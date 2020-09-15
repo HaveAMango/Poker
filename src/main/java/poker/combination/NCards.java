@@ -4,6 +4,7 @@ import poker.Card;
 import poker.Player;
 import poker.Value;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -26,8 +27,9 @@ public abstract class NCards implements Combination {
                 .map(e -> e.getKey())
                 .orElse(Value.NONE);
 
-        List<Card> kickers = cards.stream()
+        List<Card> kickers = player.getHand().getCards().stream()
                 .filter(c -> !c.getValue().equals(value))
+                .sorted(Comparator.reverseOrder())
                 .collect(Collectors.toList());
 
         return new NCardsCombinationResult(this, value, kickers);

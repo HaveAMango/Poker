@@ -8,7 +8,7 @@ public class CombinationResult implements Comparable<CombinationResult> {
 
     private boolean exists;
     protected Combination combination;
-    private List<Card> kickers;
+    protected List<Card> kickers;
 
     public CombinationResult(boolean exists, Combination combination, List<Card> kickers) {
         this.exists = exists;

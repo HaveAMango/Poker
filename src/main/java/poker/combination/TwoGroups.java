@@ -4,10 +4,7 @@ import poker.Card;
 import poker.Player;
 import poker.Value;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public abstract class TwoGroups implements Combination {
@@ -22,9 +19,10 @@ public abstract class TwoGroups implements Combination {
         byValue.values().removeIf(cards -> cards.get(0).getValue().equals(group1value));
         Value group2value = highestNValue(byValue.values(), group2size());
 
-        List<Card> kickers = player.getAllCards()
+        List<Card> kickers = player.getHand().getCards()
                 .stream()
                 .filter(c -> !c.getValue().equals(group1value) && !c.getValue().equals(group2value))
+                .sorted(Comparator.reverseOrder())
                 .collect(Collectors.toList());
 
         return new TwoGroupsCombinationResult(this, group1value, group2value, kickers);

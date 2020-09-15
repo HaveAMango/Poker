@@ -39,6 +39,6 @@ public class NCardsCombinationResult extends CombinationResult {
         if (value == Value.NONE) {
             return "NoCombination";
         }
-        return combination.name() + " of " + value.getSymbol();
+        return combination.name() + " of " + value.getSymbol() + " (Kickers: " + kickers + ")";
     }
 }

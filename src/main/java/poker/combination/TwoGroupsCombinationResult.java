@@ -42,6 +42,6 @@ public class TwoGroupsCombinationResult extends CombinationResult {
         if (value1 == Value.NONE || value2 == Value.NONE) {
             return "NoCombination";
         }
-        return combination.name() + " of " + value1.getSymbol() + " & " + value2.getSymbol();
+        return combination.name() + " of " + value1.getSymbol() + " & " + value2.getSymbol() + " (Kickers: " + kickers + ")";
     }
 }
