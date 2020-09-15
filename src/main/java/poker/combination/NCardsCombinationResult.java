@@ -1,13 +1,16 @@
 package poker.combination;
 
+import poker.Card;
 import poker.Value;
+
+import java.util.List;
 
 public class NCardsCombinationResult extends CombinationResult {
 
     private Value value;
 
-    public NCardsCombinationResult(Combination combination, Value value) {
-        super(value != Value.NONE, combination);
+    public NCardsCombinationResult(Combination combination, Value value, List<Card> kickers) {
+        super(value != Value.NONE, combination, kickers);
         this.value = value;
     }
 
@@ -18,11 +21,13 @@ public class NCardsCombinationResult extends CombinationResult {
             return priorityDelta;
         }
 
-        if (o instanceof NCardsCombinationResult) {
-            return value.getValue() - ((NCardsCombinationResult) o).value.getValue();
+        NCardsCombinationResult other = (NCardsCombinationResult) o;
+        int valueDelta = value.compareTo(other.value);
+        if (valueDelta != 0) {
+            return valueDelta;
         }
 
-        throw new RuntimeException("Should not be here");
+        return compareByKickers(o);
     }
 
     public Value getValue() {

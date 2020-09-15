@@ -6,7 +6,6 @@ import poker.Value;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public abstract class NCards implements Combination {
@@ -19,14 +18,19 @@ public abstract class NCards implements Combination {
                 .stream()
                 .collect(Collectors.groupingBy(card -> card.value));
 
-        Optional<Value> value = byValue.entrySet()
+        Value value = byValue.entrySet()
                 .stream()
                 .filter(entry -> entry.getValue().size() >= cardCount())
                 .sorted((e1, e2) -> e2.getKey().compareTo(e1.getKey()))
                 .findFirst()
-                .map(e -> e.getKey());
+                .map(e -> e.getKey())
+                .orElse(Value.NONE);
 
-        return new NCardsCombinationResult(this, value.orElse(Value.NONE));
+        List<Card> kickers = cards.stream()
+                .filter(c -> !c.getValue().equals(value))
+                .collect(Collectors.toList());
+
+        return new NCardsCombinationResult(this, value, kickers);
     }
 
     protected abstract int cardCount();

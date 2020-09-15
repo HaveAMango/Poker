@@ -36,7 +36,7 @@ public class StraightFlush implements Combination {
         }
 
         NCardsCombinationResult answer = (NCardsCombinationResult) new Straight().answer(flushCards.get());
-        return new NCardsCombinationResult(this, answer.isExists() ? answer.getValue() : Value.NONE);
+        return new NCardsCombinationResult(this, answer.isExists() ? answer.getValue() : Value.NONE, flushCards.get());
     }
 
     @Override

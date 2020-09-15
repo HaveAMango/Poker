@@ -4,6 +4,7 @@ import poker.Card;
 import poker.Player;
 import poker.Value;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -44,7 +45,7 @@ public class Straight implements Combination {
             }
         }
 
-        return new NCardsCombinationResult(this, maxStreak >= 5 ? maxCard.value : Value.NONE);
+        return new NCardsCombinationResult(this, maxStreak >= 5 ? maxCard.value : Value.NONE, new ArrayList<>());
     }
 
     @Override

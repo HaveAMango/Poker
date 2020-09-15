@@ -1,14 +1,17 @@
 package poker.combination;
 
+import poker.Card;
 import poker.Value;
+
+import java.util.List;
 
 public class TwoGroupsCombinationResult extends CombinationResult {
 
     private Value value1;
     private Value value2;
 
-    public TwoGroupsCombinationResult(Combination combination, Value value1, Value value2) {
-        super(value1 != Value.NONE && value2 != Value.NONE, combination);
+    public TwoGroupsCombinationResult(Combination combination, Value value1, Value value2, List<Card> kickers) {
+        super(value1 != Value.NONE && value2 != Value.NONE, combination, kickers);
         this.value1 = value1;
         this.value2 = value2;
     }
@@ -20,17 +23,18 @@ public class TwoGroupsCombinationResult extends CombinationResult {
             return priorityDelta;
         }
 
-        if (o instanceof TwoGroupsCombinationResult) {
-            TwoGroupsCombinationResult other = (TwoGroupsCombinationResult) o;
-            int delta1 = value1.compareTo(other.value1);
-            if (delta1 != 0) {
-                return delta1;
-            }
-
-            return value2.compareTo(other.value2);
+        TwoGroupsCombinationResult other = (TwoGroupsCombinationResult) o;
+        int delta1 = value1.compareTo(other.value1);
+        if (delta1 != 0) {
+            return delta1;
         }
 
-        throw new RuntimeException("Should not be here");
+        int delta2 = value2.compareTo(other.value2);
+        if (delta2 != 0) {
+            return delta2;
+        }
+
+        return compareByKickers(o);
     }
 
     @Override

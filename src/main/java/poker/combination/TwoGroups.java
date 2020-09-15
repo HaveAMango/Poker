@@ -18,18 +18,25 @@ public abstract class TwoGroups implements Combination {
                 .stream()
                 .collect(Collectors.groupingBy(card -> card.value));
 
-        Optional<Value> group1value = highestNValue(byValue.values(), group1size());
-        byValue.values().removeIf(cards -> cards.get(0).getValue().equals(group1value.orElse(Value.NONE)));
-        Optional<Value> group2value = highestNValue(byValue.values(), group2size());
-        return new TwoGroupsCombinationResult(this, group1value.orElse(Value.NONE), group2value.orElse(Value.NONE));
+        Value group1value = highestNValue(byValue.values(), group1size());
+        byValue.values().removeIf(cards -> cards.get(0).getValue().equals(group1value));
+        Value group2value = highestNValue(byValue.values(), group2size());
+
+        List<Card> kickers = player.getAllCards()
+                .stream()
+                .filter(c -> !c.getValue().equals(group1value) && !c.getValue().equals(group2value))
+                .collect(Collectors.toList());
+
+        return new TwoGroupsCombinationResult(this, group1value, group2value, kickers);
     }
 
-    private Optional<Value> highestNValue(Collection<List<Card>> cardGroups, int n) {
+    private Value highestNValue(Collection<List<Card>> cardGroups, int n) {
         return cardGroups.stream()
                 .filter(list -> list.size() == n)
                 .sorted((cards1, cards2) -> cards2.get(0).compareTo(cards1.get(0)))
                 .findFirst()
-                .map(cards -> cards.get(0).getValue());
+                .map(cards -> cards.get(0).getValue())
+                .orElse(Value.NONE);
     }
 
     protected abstract int group1size();

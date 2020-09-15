@@ -4,10 +4,7 @@ import poker.Card;
 import poker.Player;
 import poker.Value;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Flush implements Combination {
@@ -25,7 +22,7 @@ public class Flush implements Combination {
                 .findAny();
 
         if (!flushCards.isPresent()) {
-            return new NCardsCombinationResult(this, Value.NONE);
+            return new NCardsCombinationResult(this, Value.NONE, new ArrayList<>());
         }
 
         Optional<Value> value = flushCards.get().stream()
@@ -33,7 +30,7 @@ public class Flush implements Combination {
                 .findFirst()
                 .map(card -> card.getValue());
 
-        return new NCardsCombinationResult(this, value.orElse(Value.NONE));
+        return new NCardsCombinationResult(this, value.orElse(Value.NONE), flushCards.get());
     }
 
     @Override

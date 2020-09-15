@@ -70,7 +70,7 @@ public class Game {
     }
 
     private void initialize(String input) throws Exception {
-        //TODO: Convert to constructor
+
         String[] cardGroups = input.split(" ");
 
         Board board = null;
